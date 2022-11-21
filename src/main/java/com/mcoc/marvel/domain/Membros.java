@@ -1,13 +1,12 @@
 package com.mcoc.marvel.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mcoc.marvel.domain.enums.Grupo;
 import com.mcoc.marvel.domain.enums.Perfil;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -30,6 +29,9 @@ public class Membros implements Serializable {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "PERFIS")
     private Set<Integer> perfis = new HashSet<>();
+
+    @OneToMany(mappedBy = "membros")
+    private List<Herois> herois = new ArrayList<>();
 
     public Membros() {
         super();
